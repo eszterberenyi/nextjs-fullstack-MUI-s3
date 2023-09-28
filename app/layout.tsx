@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import React from "react";
+import React, {ReactNode} from "react";
 
 export const metadata: Metadata = {
   title: 'UX Studio Challenge',
@@ -10,11 +10,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <div className="container">
+        {children}
+      </div>
+      </body>
     </html>
   )
 }
