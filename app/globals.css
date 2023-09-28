@@ -20,6 +20,11 @@ p, h1, h2, h3, h4, h5, h6 {
     font-style: normal;
 }
 
+body {
+    background-color: #141414;
+    color: white
+}
+
 h1, .headline1 {
     font-family: Glysa, serif;
     font-size: 32px;
@@ -53,4 +58,8 @@ h3, .headline3 {
     font-size: 12px;
     line-height: 12px;
     letter-spacing: 0.01rem;
+}
+
+.container {
+    display: grid
 }
