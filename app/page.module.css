@@ -1,0 +1,19 @@
+.thinContainer {
+    height: 10vh;
+    border-bottom: 1px solid #282828
+}
+
+@media (max-height: 500px) {
+    .thinContainer {
+        height: 15vh;
+    }
+}
+
+.bordered {
+    border-right: 1px solid #282828
+}
+
+.icon {
+    color: white;
+    padding-right: 16px
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import {IconButton, Grid} from "@mui/material";
+import styles from './page.module.css'
 
 export default function Home() {
 
@@ -7,15 +8,12 @@ export default function Home() {
         <main>
             <Grid
                 container
-                sx={{
-                    height: '10vh',
-                    borderBottom: '1px solid #282828',
-                }}
+                className={styles.thinContainer}
             >
-                <Grid item xs={2} md={3} sx={{borderRight: '1px solid #282828'}}>
+                <Grid item xs={2} md={3} className={styles.bordered}>
 
                 </Grid>
-                <Grid item xs={8} md={6} sx={{borderRight: '1px solid #282828'}}>
+                <Grid item xs={8} md={6} className={styles.bordered}>
 
                 </Grid>
                 <Grid item xs={2} md={3}>
@@ -25,10 +23,7 @@ export default function Home() {
 
             <Grid
                 container
-                sx={{
-                    height: '10vh',
-                    borderBottom: '1px solid #282828'
-                }}
+                className={styles.thinContainer}
             >
                 <Grid
                     container
@@ -39,7 +34,7 @@ export default function Home() {
                     justifyContent="flex-end"
                     alignItems="center"
                 >
-                    <IconButton disabled sx={{color: 'white', paddingRight: '16px'}}>
+                    <IconButton disabled className={styles.icon}>
                         <img src="/icons/Back_arrow.png" alt="back arrow icon"/>
                     </IconButton>
                 </Grid>
@@ -48,7 +43,7 @@ export default function Home() {
                     item
                     xs={8}
                     md={6}
-                    sx={{borderRight: '1px solid #282828'}}
+                    className={styles.bordered}
                     alignItems="center"
                     justifyContent="center"
                 >
@@ -61,7 +56,7 @@ export default function Home() {
                     md={3}
                     alignItems="center"
                 >
-                    <IconButton disabled sx={{color: 'white', paddingLeft: '16px'}}>
+                    <IconButton disabled className={styles.icon}>
                         <img src="/icons/Light_mode.png" alt="light mode icon"/>
                     </IconButton>
                 </Grid>
@@ -71,7 +66,7 @@ export default function Home() {
                 container
                 sx={{ height: '80vh' }}
             >
-                <Grid item xs={2} md={3} sx={{borderRight: '1px solid #282828'}}>
+                <Grid item xs={2} md={3} className={styles.bordered}>
 
                 </Grid>
                 <Grid
@@ -79,7 +74,7 @@ export default function Home() {
                     item
                     xs={8}
                     md={6}
-                    sx={{borderRight: '1px solid #282828'}}
+                    className={styles.bordered}
                     alignItems="center"
                     justifyContent="center"
                 >
