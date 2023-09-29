@@ -1,8 +1,11 @@
 import React from "react";
 import {IconButton, Grid} from "@mui/material";
 import styles from './page.module.css'
+import prisma from "@/src/db";
 
-export default  function Home() {
+export default async function Home() {
+
+    const contacts = await prisma.contact.findMany()
 
     return (
         <main>
@@ -47,7 +50,7 @@ export default  function Home() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <h1>Contacts</h1>
+                    {contacts.map((contact => <li key={contact.id}>{contact.name}</li>))}
                 </Grid>
                 <Grid
                     container
