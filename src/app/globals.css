@@ -8,14 +8,14 @@ p, h1, h2, h3, h4, h5, h6 {
 
 @font-face {
     font-family: 'LexendDeca';
-    src: url('../public/fonts/LexendDeca-VariableFont_wght.ttf') format('truetype');
+    src: url('../../public/fonts/LexendDeca-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Glysa';
-    src: url('../public/fonts/Glysa.otf') format('opentype');
+    src: url('../../public/fonts/Glysa.otf') format('opentype');
     font-weight: 500;
     font-style: normal;
 }
