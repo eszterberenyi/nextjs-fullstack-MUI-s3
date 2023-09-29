@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -19,11 +22,12 @@
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "^20.7.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "prisma": "^5.3.1",
     "sqlite3": "^5.1.6",
-    "typescript": "latest"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }

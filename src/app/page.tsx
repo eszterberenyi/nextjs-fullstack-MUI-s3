@@ -5,6 +5,24 @@ import prisma from "@/src/db";
 
 export default async function Home() {
 
+    //FOR DEVELOPMENT
+    // async function deleteAllRecords() {
+    //     try {
+    //         await prisma.contact.deleteMany({
+    //             where: {},
+    //         });
+    //
+    //         console.log('All records deleted from the table.');
+    //     } catch (error) {
+    //         console.error('Error deleting records:', error);
+    //     } finally {
+    //         await prisma.$disconnect();
+    //     }
+    // }
+    //
+    // deleteAllRecords();
+    //FOR DEVELOPMENT
+
     const contacts = await prisma.contact.findMany()
 
     return (
