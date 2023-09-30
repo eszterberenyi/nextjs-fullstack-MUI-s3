@@ -8,6 +8,7 @@ async function main() {
             name: 'Timothy Lewis',
             email: 't.lewis@mail.com',
             phone: '+36 01 234 5678',
+            photoUrl: ''
             },
     })
     const jacqueline = await prisma.contact.create({
