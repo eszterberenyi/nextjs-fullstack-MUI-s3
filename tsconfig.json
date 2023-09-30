@@ -23,6 +23,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../WebStorm-201.6668.106/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts",
+    "../../WebStorm-201.6668.106/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
