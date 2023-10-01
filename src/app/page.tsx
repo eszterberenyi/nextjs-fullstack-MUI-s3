@@ -2,10 +2,11 @@ import React from "react";
 import {IconButton, Grid} from "@mui/material";
 import styles from './page.module.css'
 import prisma from "@/src/db";
+import ContactForm from "@/src/components/ContactForm";
 
 export default async function Home() {
 
-    const contacts = await prisma.contact.findMany()
+    const contacts = await prisma.contact.findMany();
 
     return (
         <main>
@@ -50,9 +51,9 @@ export default async function Home() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    {contacts.map((contact => 
+                    {contacts.map((contact =>
                         <li key={contact.id}>
-                            <img src={`https://uxstudio-challenge-images.s3.eu-north-1.amazonaws.com/${contact.id}`} alt="" />
+                            {contact.name}
                         </li>
                     ))}
                 </Grid>
@@ -85,7 +86,7 @@ export default async function Home() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    <h1>People</h1>
+                    <ContactForm hasPhoto={false}/>
                 </Grid>
                 <Grid item xs={2} md={3}>
 
