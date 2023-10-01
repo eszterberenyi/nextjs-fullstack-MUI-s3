@@ -2,7 +2,8 @@ import React from "react";
 import {IconButton, Grid} from "@mui/material";
 import styles from './page.module.css'
 import prisma from "@/src/db";
-import ContactForm from "@/src/components/ContactForm";
+import ContactForm from "@/src/components/contactForm/ContactForm";
+import Header from '@/src/components/header/Header'
 
 export default async function Home() {
 
@@ -51,11 +52,7 @@ export default async function Home() {
                     alignItems="center"
                     justifyContent="center"
                 >
-                    {contacts.map((contact =>
-                        <li key={contact.id}>
-                            {contact.name}
-                        </li>
-                    ))}
+                    <Header/>
                 </Grid>
                 <Grid
                     container

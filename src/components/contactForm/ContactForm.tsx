@@ -18,29 +18,6 @@ const initialFormData: FormData = {
     hasPhoto: false
 };
 
-// const styles = {
-//     mainContainer: {
-//         display: 'flex',
-//         width: '364px',
-//         paddingTop: '24px',
-//         flexDirection: 'column',
-//         alignItems: 'center',
-//         gap: '24px',
-//         borderRadius: '8px',
-//         background: 'var(--grey-g-100, #141414)',
-//     },
-//     formContainer: {
-//         display: 'flex',
-//         width: '316px',
-//         flexDirection: 'column',
-//         alignItems: 'flex-start',
-//         gap: '24px',
-//     },
-//     textInput: {
-//         outline: 'none'
-//     }
-//   } as const;
-
 const ContactForm: React.FC = ({hasPhoto}) => {
     const [formData, setFormData] = useState<FormData>(initialFormData);
 

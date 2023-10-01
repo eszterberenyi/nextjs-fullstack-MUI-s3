@@ -1,0 +1,23 @@
+.addBtn {
+    border-radius: 20px;
+    border: 1px solid #3C3C3C;  
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%), linear-gradient(180deg, rgba(40, 40, 40, 0.70) 0%, #282828 100%), #141414;
+}
+
+.iconSize {
+    height: 20px;
+    width: 20px;
+}
+
+@media (max-width: 815px) {
+    .headerFontSize {
+      font-size: 20px; /* Decrease font size for smaller screens */
+    }
+    .addBtnText {
+        display: none !important
+    }
+    .iconSize {
+        height: 14px;
+        width: 14px;;
+    }
+  }
