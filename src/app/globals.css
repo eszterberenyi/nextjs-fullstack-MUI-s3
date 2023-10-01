@@ -22,7 +22,11 @@ p, h1, h2, h3, h4, h5, h6 {
 
 body {
     background-color: #141414;
-    color: white
+    color: white;
+    font-family: LexendDeca, serif;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01rem;
 }
 
 h1, .headline1 {
@@ -44,6 +48,14 @@ h3, .headline3 {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.01rem;
+}
+
+button {
+    font-family: LexendDeca, serif;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01rem;
+    border-style: none;
 }
 
 .text {

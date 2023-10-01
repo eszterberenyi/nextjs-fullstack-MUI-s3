@@ -1,0 +1,71 @@
+.textInput {
+    outline: none;
+    display: flex;
+    height: 40px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid var(--grey-g-60, #282828);
+    background: var(--grey-g-80, #1E1E1E);
+    color: rgba(255, 255, 255, 0.32);
+}
+
+.labelColor {
+    color: rgba(255, 255, 255, 0.56);
+    align-self: stretch;
+}
+
+.mainContainer {
+    display: flex;
+    width: 364px;
+    padding-top: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 8px;
+    background: var(--grey-g-100, #141414); 
+}
+
+.formContainer {
+    display: flex;
+    width: 316px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.footerContainer {
+    display: flex;
+    padding: 24px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.submitBtn {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: #262626;
+    color: inherit
+}
+
+.cancelBtn {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: var(--grey-g-100, #141414);
+    color: inherit
+}
+
+
+
