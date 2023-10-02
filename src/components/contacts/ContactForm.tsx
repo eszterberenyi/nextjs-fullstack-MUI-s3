@@ -33,7 +33,9 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
 
     const handleFileDeleteButtonClick = () => {
         URL.revokeObjectURL(image);
-        setImage(null)
+        setImage(null);
+        fileInputRef.current.value = ''
+       
         // setFormData({...formData, [image]: image})
     }
 
@@ -169,7 +171,13 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                             />
                         </Grid>
                         <Grid item container className={styles.footerContainer} justifyContent='flex-end'>
-                            <button type='reset' className={styles.cancelBtn} onClick={handleCloseDialog}>Cancel</button>
+                            <button type='reset' className={styles.cancelBtn} onClick={ () => {
+                                handleCloseDialog();
+                                handleFileDeleteButtonClick();
+                            }
+                            }>
+                                Cancel
+                            </button>
                             <button type="submit" className={styles.submitBtn}>Done</button>
                         </Grid>
                     </Grid>
