@@ -1,10 +1,8 @@
 'use client'
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import {Grid, Modal, Dialog, IconButton} from "@mui/material";
+import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
-import headerStyles from '@/src/components/header/Header.module.css';
-import Avatar from '@mui/material/Avatar';
 
 interface FormData {
     name: string;

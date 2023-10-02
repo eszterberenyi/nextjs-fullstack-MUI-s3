@@ -8,6 +8,7 @@ const region = "eu-north-1"
 const bucketName = "uxstudio-challenge-images"
 const accessKeyId = process.env.AWS_ACCESS_KEY as string;
 const secretAccessKey = process.env.AWS_SECRET_KEY as string;
+export const awsUrl = 'https://uxstudio-challenge-images.s3.eu-north-1.amazonaws.com/'
 
 const s3 = new aws.S3({
     region,

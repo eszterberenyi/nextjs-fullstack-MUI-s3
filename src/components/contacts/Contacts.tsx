@@ -4,7 +4,7 @@ import styles from "@/src/app/page.module.css"
 import ContactForm from "@/src/components/contacts/ContactForm";
 import Header from '@/src/components/header/Header';
 import React, { useState } from 'react';
-import ContactList from '@/src/components/contacts/ContactList';
+import Contact from '@/src/components/contacts/Contact';
 import { ContactWithId } from "@/prisma/seed";
 
 interface Props {
@@ -88,9 +88,15 @@ const Contacts = (props: Props) => {
                     md={6}
                     className={styles.bordered}
                     alignItems="center"
-                    justifyContent="center"
+                    justifyContent="flex-start"
+                    direction='column'
+                    rowGap={2}
+                    pt={2}
+                    pl={2}
                 >
-                    <ContactList contactsData={props.contactsData}/>
+                    {props.contactsData.map((contact => 
+                        <Contact contactData={contact} key={contact.id}/>    
+                    ))}
                 </Grid>
                 <Grid item xs={2} md={3}>
 
