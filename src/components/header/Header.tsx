@@ -19,7 +19,7 @@ const Header = ({handleOpenDialog}) => {
                     </IconButton>
                 </Grid>
                 <Grid item >
-                    <Avatar src="/images/profile_placeholder.png" sx={{height: '20px', width: '20px', border: '1px solid white' }}/>
+                    <Avatar src="/icons/photo.jpeg" sx={{height: '20px', width: '20px' }}/>
                 </Grid>
                 <Grid item  > 
                     <IconButton
