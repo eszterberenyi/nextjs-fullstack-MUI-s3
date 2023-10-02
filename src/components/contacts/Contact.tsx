@@ -1,5 +1,5 @@
 'use client'
-import {IconButton, Grid, Avatar} from "@mui/material";
+import {IconButton, Grid, Avatar, Popover} from "@mui/material";
 import React from 'react'
 import { ContactWithId } from "@/prisma/seed";
 import { awsUrl } from "../../s3";
@@ -10,6 +10,28 @@ interface Props {
 }
 
 const Contact = (props: Props) => {
+    const [mouseAnchorEl, setMouseAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+    const [touchAnchorEl, setTouchAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+    const handleMouseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setMouseAnchorEl(event.currentTarget);
+    };
+
+    const handleMouseClose = () => {
+        setMouseAnchorEl(null);
+    };
+
+    const handleTouchClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setTouchAnchorEl(event.currentTarget);
+    };
+
+    const handleTouchClose = () => {
+        setTouchAnchorEl(null);
+    };
+
+    const mousePopoverOpen = Boolean(mouseAnchorEl);
+    const touchPopoverOpen = Boolean(touchAnchorEl);
+
     return (
         <Grid
             container
@@ -39,7 +61,7 @@ const Contact = (props: Props) => {
                 justifyContent="flex-end"
                 spacing={2}
                 pr={1}
-                className={styles.hoverableIcons}
+                className={`${mousePopoverOpen ? styles.hoverableIconsVisibityUnderPopOver : styles.hoverableIcons}`}
             >
                 <Grid item>
                     <IconButton disabled className={styles.icon} size='small'>
@@ -52,9 +74,46 @@ const Contact = (props: Props) => {
                     </IconButton>
                 </Grid>
                 <Grid item>
-                    <IconButton disabled className={styles.icon} size='small'>
+                    <IconButton
+                        className={`${styles.icon} ${styles.moreIcon}`}
+                        size='small'
+                        onClick={handleMouseClick}
+                    >
                         <img src="/icons/More.png" alt="more options icon" className={styles.iconImg}/>
                     </IconButton>
+                    <Popover
+                        open={mousePopoverOpen}
+                        anchorEl={mouseAnchorEl}
+                        onClose={handleMouseClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        PaperProps = {{
+                            style: { backgroundColor: '#1E1E1E', padding: '8px 20px 8px 8px' }
+                        }}
+                    >
+                        <Grid container direction='column'>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size="small">
+                                    <img src="/icons/Settings.png" alt="edit icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Edit</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size="small">
+                                    <img src="/icons/Favourite.png" alt="favourite icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Favourite</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item className={styles.removeIcon}> 
+                                <IconButton disableRipple className={`${styles.icon}`} size="small">
+                                    <img src="/icons/Delete.png" alt="delete icon" className={styles.iconImg}/>
+                                    <span className="text" style={{color: 'white', marginLeft: '5px'}}>Remove</span>
+                                </IconButton>
+                            </Grid>
+                        </Grid>
+                    </Popover>
                 </Grid>
             </Grid>
 
@@ -67,10 +126,59 @@ const Contact = (props: Props) => {
                  className={styles.nonHoverableIcons}
             >
                 <Grid item>
-                    <IconButton disabled className={styles.icon} size='small'>
+                    <IconButton
+                        size='small'
+                        onClick={handleTouchClick}
+                        className={`${styles.icon} ${styles.moreIcon}`}
+                    >
                         <img src="/icons/More.png" alt="more options icon" className={styles.iconImg}/>
                     </IconButton>
                 </Grid>
+                <Popover
+                        open={touchPopoverOpen}
+                        anchorEl={touchAnchorEl}
+                        onClose={handleTouchClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        PaperProps = {{
+                            style: { backgroundColor: '#1E1E1E', padding: '8px 20px 8px 8px' }
+                        }}
+                    >
+                        <Grid container direction='column'>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size='small'>
+                                    <img src="/icons/Mute.png" alt="mute icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Mute</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size="small">
+                                    <img src="/icons/Call.png" alt="call icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Call</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size="small">
+                                    <img src="/icons/Settings.png" alt="edit icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Edit</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item>
+                                <IconButton disabled className={styles.icon} size="small">
+                                    <img src="/icons/Favourite.png" alt="favourite icon" className={styles.iconImg}/>
+                                    <span  className="text" style={{color: 'white', marginLeft: '5px'}}>Favourite</span>
+                                </IconButton>
+                            </Grid>
+                            <Grid item className={styles.removeIcon}> 
+                                <IconButton disableRipple className={`${styles.icon}`} size="small">
+                                    <img src="/icons/Delete.png" alt="delete icon" className={styles.iconImg}/>
+                                    <span className="text" style={{color: 'white', marginLeft: '5px'}}>Remove</span>
+                                </IconButton>
+                            </Grid>
+                        </Grid>
+                    </Popover>
             </Grid>
 
         </Grid>

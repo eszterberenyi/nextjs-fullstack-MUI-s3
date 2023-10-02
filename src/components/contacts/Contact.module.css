@@ -27,6 +27,10 @@
     }
 }
 
+.hoverableIconsVisibityUnderPopOver {
+    opacity: 1;
+}
+
 @media (hover: none) {
     .hoverableIcons {
         display: none;
@@ -39,12 +43,23 @@
 
 .icon {
     color: white;
-    padding: 0
+    /* padding: 0 */
 }
+
+.moreIcon:hover {
+    font-size: 14px;
+    border-radius: 8px;
+    background:  #1E1E1E;
+}
+
 
 .iconImg {
     width: 16px;
     height: 16px;
+}
+
+.removeIcon:hover {
+    background: var(--grey-g-70, #232323);
 }
 
 
