@@ -1,0 +1,50 @@
+
+@media (max-width: 815px) {
+    .contactName {
+      font-size: 14px; /* Decrease font size for smaller screens */
+    }
+}
+
+@media (max-width: 500px) {
+    .contactName {
+      font-size: 11px; /* Decrease font size for smaller screens */
+    }
+    .phoneNumber {
+        font-size: 10px;
+    }
+}
+
+@media (hover :hover) {
+    .hoverableIcons {
+        opacity: 0;
+    }
+    
+    .hoverableIcons:hover {
+        opacity: 1;
+    }
+    .nonHoverableIcons {
+        display: none
+    }
+}
+
+@media (hover: none) {
+    .hoverableIcons {
+        display: none;
+    }
+    .iconImg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.icon {
+    color: white;
+    padding: 0
+}
+
+.iconImg {
+    width: 16px;
+    height: 16px;
+}
+
+
