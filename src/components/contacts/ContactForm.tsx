@@ -1,26 +1,31 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
+import { generateUploadURL } from "@/src/s3";
 
 interface FormData {
     name: string;
     phone: string;
     email: string;
-    hasPhoto: boolean
+    hasPhoto: boolean;
+    photo: string
 }
 
 const initialFormData: FormData = {
     name: '',
     phone: '',
     email: '',
-    hasPhoto: false
+    hasPhoto: false,
+    photo: ''
 };
 
 const ContactForm = ({dialogOpen, handleCloseDialog}) => {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [image, setImage] = useState(null);
+    // const [imageData, setImageData] = useState(null);
+    // const [binaryImage, setBinaryImage] = useState<string>(''); // State to hold the binary string
     const fileInputRef = useRef(null);
      
     const handleFileInputButtonClick = () => {
@@ -32,17 +37,25 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
     const handleFileDeleteButtonClick = () => {
         URL.revokeObjectURL(image);
         setImage(null);
-        fileInputRef.current.value = ''
-       
-        // setFormData({...formData, [image]: image})
+        fileInputRef.current.value = '';
+        // setFormData({...formData, photo: '', hasPhoto:false});
+        // setBinaryImage(''); // Clear the binary image when the image is deleted
+        // setImageData(null)
     }
 
     const handleFileChanged = (event) => {
-        const newImage = event.target?.files?.[0];
-    
+        const newImage = event.target?.files[0];
         if (newImage) {
-            setImage(URL.createObjectURL(newImage));
-            // setFormData({...formData, [image]: image})
+            const imageObjectUrl = URL.createObjectURL(newImage);
+            // setFormData({...formData, photo: newImage, hasPhoto: true})
+            setImage(imageObjectUrl);
+            // const reader = new FileReader();
+            // reader.onload = (e) => {
+            //     const binaryString = e.target.result as string;
+            //     setBinaryImage(binaryString);
+            // };
+            // reader.readAsBinaryString(newImage);
+            // setImageData(newImage);
         }
       };
 
@@ -55,7 +68,12 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
         e.preventDefault()
         try {
             const response = await axios.post("/api/contacts", JSON.stringify(formData));
+            
+            // const res = await axios.put(url, fileInputRef.current.files[0])
             setFormData(initialFormData);
+            URL.revokeObjectURL(image);
+            setImage(null);
+            fileInputRef.current.value = ''
         } catch (error) {
             console.error('Error:', error);
         }
@@ -100,11 +118,12 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                             <input
                                 ref={fileInputRef}
                                 accept="image/*"
-                                id="avatar-image-upload"
+                                // name="photo"
+                                // id="photo"
                                 type="file" 
                                 hidden
                                 onChange={handleFileChanged}
-                                />  
+                            />  
                             <img 
                                 src={`/icons/${image ? 'Change' : 'Add'}.png`} 
                                 alt="add icon" 
