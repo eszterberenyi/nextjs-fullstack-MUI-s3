@@ -21,7 +21,7 @@ const initialFormData: FormData = {
     photo: ''
 };
 
-const ContactForm = ({dialogOpen, handleCloseDialog}) => {
+const ContactForm = ({dialogOpen, handleCloseDialog, onDataUpdate }) => {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [image, setImage] = useState(null);
     // const [imageData, setImageData] = useState(null);
@@ -67,13 +67,19 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/api/contacts", JSON.stringify(formData));
-            
+            // const sendDataToParent = async () => {
+                const response = await axios.post("/api/contacts", JSON.stringify(formData));
+                onDataUpdate();
+            //     onDataUpdate(response.data); // Call the callback to send data to the parent
+            //   };
+            // await sendDataToParent()
             // const res = await axios.put(url, fileInputRef.current.files[0])
             setFormData(initialFormData);
-            URL.revokeObjectURL(image);
-            setImage(null);
-            fileInputRef.current.value = ''
+            if (image) {
+                URL.revokeObjectURL(image);
+                setImage(null);
+                fileInputRef.current.value = ''
+            }
         } catch (error) {
             console.error('Error:', error);
         }
