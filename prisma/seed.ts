@@ -4,7 +4,15 @@ import {uploadImageToBucket} from "../src/s3";
 
 const prisma = new PrismaClient()
 
-type Contact = {
+export type Contact = {
+    name: string;
+    email: string;
+    phone: string;
+    hasPhoto: boolean;
+};
+
+export type ContactWithId = {
+    id: number;
     name: string;
     email: string;
     phone: string;
