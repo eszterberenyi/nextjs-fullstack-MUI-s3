@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import * as fs from 'fs';
+import fs from 'fs';
 import {uploadImageToBucket} from "../src/s3";
 
 const prisma = new PrismaClient()
