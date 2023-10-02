@@ -195,7 +195,7 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                             }>
                                 Cancel
                             </button>
-                            <button type="submit" className={styles.submitBtn}>Done</button>
+                            <button type="submit" className={styles.submitBtn} onClick={handleCloseDialog}>Done</button>
                         </Grid>
                     </Grid>
                 </form>
