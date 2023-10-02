@@ -1,0 +1,73 @@
+.textInput {
+    outline: none;
+    display: flex;
+    height: 20px;
+    padding: 8px 12px;
+    width: 90%;
+    border-radius: 8px;
+    border: 1px solid var(--grey-g-60, #282828);
+    background: var(--grey-g-80, #1E1E1E);
+    color: rgba(255, 255, 255, 0.32);}
+
+.labelColor {
+    color: rgba(255, 255, 255, 0.56);
+    align-self: stretch;
+}
+
+.mainContainer {
+    padding: 24px 24px 10px 24px;
+    gap: 24px;
+    border-radius: 8px;
+    background: var(--grey-g-100, #141414); 
+}
+
+.footerContainer {
+    padding: 24px 0 0 0;
+    gap: 8px;
+}
+
+.submitBtn {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: #262626;
+    color: inherit
+}
+
+.cancelBtn {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: var(--grey-g-100, #141414);
+    color: inherit
+}
+
+.addPictureBtn {
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #3C3C3C;  
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%), linear-gradient(180deg, rgba(40, 40, 40, 0.70) 0%, #282828 100%), #141414;
+}
+
+.deleteIcon {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #3C3C3C;  
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%), linear-gradient(180deg, rgba(40, 40, 40, 0.70) 0%, #282828 100%), #141414;
+}
+
+
+
+@media (max-width: 815px) {
+    .addPictureBtn {
+      font-size: 10px; /* Decrease font size for smaller screens */
+    }
+}
