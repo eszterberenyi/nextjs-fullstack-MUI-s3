@@ -70,6 +70,7 @@ const EditForm = (props: Props) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        props.handleCloseDialog();
         try {
             await axios.put(`/api/${props.contact.id}`, JSON.stringify(formData));
             if (image) {

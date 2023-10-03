@@ -44,7 +44,7 @@ const DesktopPopver = (props: Props) => {
                         <img src="/icons/Favourite.png" alt="favourite icon" className={styles.iconImg}/>
                         <span  className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Favourite
-                        </span> 
+                        </span>
                     </IconButton>
                 </Grid>
                 <Grid item className={styles.activeIcon}> 

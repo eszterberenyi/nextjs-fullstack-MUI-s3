@@ -59,6 +59,7 @@ const ContactForm = (props: Props) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        props.handleCloseDialog();
         try {
             await axios.post("/api/contacts", JSON.stringify(formData));
             props.onDataUpdate();
@@ -184,8 +185,10 @@ const ContactForm = (props: Props) => {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     required
+                                    placeholder='36 00 00 0000'
                                     className={styles.textInput}
                                     autoComplete="off"
+                                    pattern="[0-9]{2} [0-9]{2} [0-9]{3} [0-9]{4}"
                                 />
                             </Grid>
                             <Grid item>
@@ -222,7 +225,6 @@ const ContactForm = (props: Props) => {
                                 <button
                                     type="submit"
                                     className={styles.submitBtn}
-                                    onClick={props.handleCloseDialog}
                                 >
                                     Done
                                 </button>

@@ -74,7 +74,7 @@ const Contact = (props: Props) => {
                     </Grid>
                     <Grid item>
                         <p className={`message ${styles.phoneNumber}`} style={{color: 'rgba(255, 255, 255, 0.56)'}}>
-                            {props.contactData.phone}
+                            {props.contactData.phone[0] === '+' ? props.contactData.phone : `+${props.contactData.phone}`}
                         </p>
                     </Grid>
                 </Grid>
