@@ -3,7 +3,7 @@
 ### Clone the github repository to your local machine
 
 ### Install dependencies
-	npm intall
+	npm install
 	*or*
 	yarn install
 	
