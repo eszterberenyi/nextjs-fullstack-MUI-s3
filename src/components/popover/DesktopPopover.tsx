@@ -1,10 +1,12 @@
 import {IconButton, Grid, Popover} from "@mui/material";
-import styles from '../contacts/Contact.module.css'
+import styles from '../contacts/Contact.module.css';
+import React, {MouseEvent} from 'react'
 
 interface Props {
     mousePopoverOpen: boolean;
     mouseAnchorEl: HTMLButtonElement | null;
-    handleMouseClose: () => void
+    handleMouseClose: () => void;
+    handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 
@@ -40,7 +42,12 @@ const DesktopPopver = (props: Props) => {
                     </IconButton>
                 </Grid>
                 <Grid item className={styles.removeIcon}> 
-                    <IconButton disableRipple className={`${styles.icon}`} size="small">
+                    <IconButton
+                        disableRipple
+                        className={`${styles.icon}`}
+                        size="small"
+                        onClick={(e) => props.handleDelete(e)}
+                    >
                         <img src="/icons/Delete.png" alt="delete icon" className={styles.iconImg}/>
                         <span className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Remove

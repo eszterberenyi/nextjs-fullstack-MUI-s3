@@ -5,11 +5,12 @@ import { ContactWithId } from "@/prisma/seed";
 import { awsUrl } from "../../s3";
 import styles from './Contact.module.css';
 import DesktopPopover from '@/src/components/popover/DesktopPopover';
-import MobilePopover from '@/src/components/popover/MobilePopover'
-
+import MobilePopover from '@/src/components/popover/MobilePopover';
+import axios from 'axios';
 
 interface Props {
     contactData: ContactWithId
+    onDataUpdate: () => void;
 }
 
 const Contact = (props: Props) => {
@@ -34,6 +35,18 @@ const Contact = (props: Props) => {
 
     const mousePopoverOpen = Boolean(mouseAnchorEl);
     const touchPopoverOpen = Boolean(touchAnchorEl);
+
+    const handleDelete = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        try {
+          const { id } = props.contactData;
+          await axios.delete(`/api/${id}`);
+          props.onDataUpdate();
+        //   props.onDataUpdate();
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    };
 
     return (
         <Grid
@@ -93,6 +106,7 @@ const Contact = (props: Props) => {
                         mousePopoverOpen={mousePopoverOpen}
                         mouseAnchorEl={mouseAnchorEl}
                         handleMouseClose={handleMouseClose}
+                        handleDelete={(e) => handleDelete(e)}
                    />
 
                 </Grid>
