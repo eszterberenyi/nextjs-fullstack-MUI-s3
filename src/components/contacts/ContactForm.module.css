@@ -68,6 +68,6 @@
 
 @media (max-width: 815px) {
     .addPictureBtn {
-      font-size: 10px; /* Decrease font size for smaller screens */
+      font-size: 10px;
     }
 }

@@ -17,17 +17,17 @@ const s3 = new aws.S3({
     signatureVersion: 'v4'
 })
 
-export async function generateUploadURL(contactId : number) {
+// export async function generateUploadURL(contactId : number) {
 
-    const params = ({
-      Bucket: bucketName,
-      Key: contactId.toString(),
-      Expires: 60
-    })
+//     const params = ({
+//       Bucket: bucketName,
+//       Key: contactId.toString(),
+//       Expires: 60
+//     })
     
-    const uploadURL = await s3.getSignedUrlPromise('putObject', params)
-    return uploadURL
-}
+//     const uploadURL = await s3.getSignedUrlPromise('putObject', params)
+//     return uploadURL
+// }
 
 export async function uploadImageToBucket(binaryString : Buffer, contactId: number) {
     const params = ({
@@ -42,5 +42,4 @@ export async function uploadImageToBucket(binaryString : Buffer, contactId: numb
     } catch (error) {
         console.error("Error uploading:", error);
     }
-    // return await s3.getSignedUrlPromise('putObject', params)
 }

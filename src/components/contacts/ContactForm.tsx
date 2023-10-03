@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
-import { generateUploadURL } from "@/src/s3";
 
 interface FormData {
     name: string;
@@ -13,6 +12,12 @@ interface FormData {
     photo: string
 }
 
+interface Props {
+    dialogOpen: boolean;
+    handleCloseDialog: () => void;
+    onDataUpdate: () => void;
+  }
+
 const initialFormData: FormData = {
     name: '',
     phone: '',
@@ -21,11 +26,10 @@ const initialFormData: FormData = {
     photo: ''
 };
 
-const ContactForm = ({dialogOpen, handleCloseDialog}) => {
+const ContactForm = (props: Props) => {
+
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [image, setImage] = useState(null);
-    // const [imageData, setImageData] = useState(null);
-    // const [binaryImage, setBinaryImage] = useState<string>(''); // State to hold the binary string
     const fileInputRef = useRef(null);
      
     const handleFileInputButtonClick = () => {
@@ -38,24 +42,13 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
         URL.revokeObjectURL(image);
         setImage(null);
         fileInputRef.current.value = '';
-        // setFormData({...formData, photo: '', hasPhoto:false});
-        // setBinaryImage(''); // Clear the binary image when the image is deleted
-        // setImageData(null)
     }
 
     const handleFileChanged = (event) => {
         const newImage = event.target?.files[0];
         if (newImage) {
             const imageObjectUrl = URL.createObjectURL(newImage);
-            // setFormData({...formData, photo: newImage, hasPhoto: true})
             setImage(imageObjectUrl);
-            // const reader = new FileReader();
-            // reader.onload = (e) => {
-            //     const binaryString = e.target.result as string;
-            //     setBinaryImage(binaryString);
-            // };
-            // reader.readAsBinaryString(newImage);
-            // setImageData(newImage);
         }
       };
 
@@ -68,12 +61,13 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
         e.preventDefault()
         try {
             const response = await axios.post("/api/contacts", JSON.stringify(formData));
-            
-            // const res = await axios.put(url, fileInputRef.current.files[0])
+            props.onDataUpdate();
             setFormData(initialFormData);
-            URL.revokeObjectURL(image);
-            setImage(null);
-            fileInputRef.current.value = ''
+            if (image) {
+                URL.revokeObjectURL(image);
+                setImage(null);
+                fileInputRef.current.value = ''
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -81,8 +75,8 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
 
     return (
         <Dialog
-        open={dialogOpen}
-        onClose={handleCloseDialog}
+        open={props.dialogOpen}
+        onClose={props.handleCloseDialog}
         aria-labelledby="modal-modal-add-contact-dialog"
         aria-describedby="modal-modal-add-contact-dialog"
         PaperProps={{
@@ -105,7 +99,12 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                     <h2>Add Contact</h2>
                 </Grid>
                 
-                <Grid item container spacing={2} alignItems='center' justifyContent={image? 'space-between' : 'flex-start'}>
+                <Grid
+                    item
+                    container
+                    spacing={2}
+                    alignItems='center'
+                    justifyContent={image? 'space-between' : 'flex-start'}>
                     <Grid item >
                         <Avatar src={image} sx={{width: '60px', height: '60px'}}/>
                     </Grid>
@@ -118,8 +117,6 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                             <input
                                 ref={fileInputRef}
                                 accept="image/*"
-                                // name="photo"
-                                // id="photo"
                                 type="file" 
                                 hidden
                                 onChange={handleFileChanged}
@@ -136,7 +133,9 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                     {
                         image &&
                         <Grid item >
-                            <IconButton onClick={handleFileDeleteButtonClick} className={styles.deleteIcon}>
+                            <IconButton
+                                onClick={handleFileDeleteButtonClick}
+                                className={styles.deleteIcon}>
                                 <img 
                                     src={`/icons/Delete.png`} 
                                     alt="delete icon" 
@@ -146,59 +145,87 @@ const ContactForm = ({dialogOpen, handleCloseDialog}) => {
                     }
                 </Grid>
                 
-                <Grid item container flexDirection='column'>
-                <form onSubmit={handleSubmit}>
-                    <Grid item container direction='column' rowGap={1.5}>
-                        <Grid item>
-                            <label htmlFor="name" className={styles.labelColor}>Name</label>
+                <Grid
+                    item
+                    container
+                    flexDirection='column'
+                >
+                    <form onSubmit={handleSubmit}>
+                        <Grid
+                            item
+                            container
+                            direction='column'
+                            rowGap={1.5}
+                        >
+                            <Grid item>
+                                <label htmlFor="name" className={styles.labelColor}>
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    className={styles.textInput}
+                                />
+                            </Grid>
                             
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className={styles.textInput}
-                            />
+                            <Grid item>
+                                <label htmlFor="phone" className={styles.labelColor}>
+                                    Phone number
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    required
+                                    className={styles.textInput}
+                                />
+                            </Grid>
+                            <Grid item>
+                                <label htmlFor="email" className={styles.labelColor}>
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className={styles.textInput}
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                className={styles.footerContainer}
+                                justifyContent='flex-end'
+                            >
+                                <button
+                                    type='reset'
+                                    className={styles.cancelBtn}
+                                    onClick={ () => {
+                                        props.handleCloseDialog();
+                                        handleFileDeleteButtonClick();
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className={styles.submitBtn}
+                                    onClick={props.handleCloseDialog}
+                                >
+                                    Done
+                                </button>
+                            </Grid>
                         </Grid>
-                        
-                        <Grid item>
-                            <label htmlFor="phone" className={styles.labelColor}>Phone number</label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                                className={styles.textInput}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <label htmlFor="email" className={styles.labelColor}>Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className={styles.textInput}
-                            />
-                        </Grid>
-                        <Grid item container className={styles.footerContainer} justifyContent='flex-end'>
-                            <button type='reset' className={styles.cancelBtn} onClick={ () => {
-                                handleCloseDialog();
-                                handleFileDeleteButtonClick();
-                            }
-                            }>
-                                Cancel
-                            </button>
-                            <button type="submit" className={styles.submitBtn} onClick={handleCloseDialog}>Done</button>
-                        </Grid>
-                    </Grid>
-                </form>
+                    </form>
                 </Grid>
             </Grid>
         </Dialog>

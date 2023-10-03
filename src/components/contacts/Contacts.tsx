@@ -3,18 +3,35 @@ import {IconButton, Grid} from "@mui/material";
 import styles from "@/src/app/page.module.css"
 import ContactForm from "@/src/components/contacts/ContactForm";
 import Header from '@/src/components/header/Header';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Contact from '@/src/components/contacts/Contact';
 import { ContactWithId } from "@/prisma/seed";
+import axios from 'axios';
 
 interface Props {
     contactsData: ContactWithId[]
 }
 
 const Contacts = (props: Props) => {
+    const [data, setData] = useState(props.contactsData);
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleOpenDialog = () => setDialogOpen(true);
     const handleCloseDialog = () => setDialogOpen(false);
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('/api/contacts');
+          const newData = response.data;
+          setData(newData);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData();
+      }, []);
+    
 
     return (
         <>
@@ -94,7 +111,7 @@ const Contacts = (props: Props) => {
                     pt={2}
                     pl={2}
                 >
-                    {props.contactsData.map((contact => 
+                    {data.map((contact => 
                         <Contact contactData={contact} key={contact.id}/>    
                     ))}
                 </Grid>
@@ -102,7 +119,11 @@ const Contacts = (props: Props) => {
 
                 </Grid>
             </Grid>
-            <ContactForm dialogOpen={dialogOpen} handleCloseDialog={handleCloseDialog}/>
+            <ContactForm
+                onDataUpdate={fetchData}
+                dialogOpen={dialogOpen}
+                handleCloseDialog={handleCloseDialog}
+            />
         </>
     )
 }
