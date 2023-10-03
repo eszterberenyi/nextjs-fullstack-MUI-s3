@@ -29,8 +29,8 @@ const initialFormData: FormData = {
 const ContactForm = (props: Props) => {
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
-    const [image, setImage] = useState(null);
-    const fileInputRef = useRef(null);
+    const [image, setImage] = useState<string>('');
+    const fileInputRef = useRef<HTMLInputElement>(null);
      
     const handleFileInputButtonClick = () => {
         if (fileInputRef.current) {
@@ -40,12 +40,13 @@ const ContactForm = (props: Props) => {
 
     const handleFileDeleteButtonClick = () => {
         URL.revokeObjectURL(image);
-        setImage(null);
-        fileInputRef.current.value = '';
+        setImage('');
+        fileInputRef.current!.value = '';
     }
 
     const handleFileChanged = (event: ChangeEvent<HTMLInputElement>) => {
-        const newImage = event.target?.files[0];
+        if (!event.target.files) return;
+        const newImage = event.target.files[0];
         if (newImage) {
             const imageObjectUrl = URL.createObjectURL(newImage);
             setImage(imageObjectUrl);
@@ -66,8 +67,8 @@ const ContactForm = (props: Props) => {
             setFormData(initialFormData);
             if (image) {
                 URL.revokeObjectURL(image);
-                setImage(null);
-                fileInputRef.current.value = ''
+                setImage('');
+                fileInputRef.current!.value = ''
             }
         } catch (error) {
             console.error('Error:', error);

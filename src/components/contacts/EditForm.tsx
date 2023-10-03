@@ -39,8 +39,8 @@ const EditForm = (props: Props) => {
     }
 
     const [formData, setFormData] = useState<FormData>(emptyFormData);
-    const [image, setImage] = useState(null);
-    const fileInputRef = useRef(null);
+    const [image, setImage] = useState<string>('');
+    const fileInputRef = useRef<HTMLInputElement>(null);
      
     const handleFileInputButtonClick = () => {
         if (fileInputRef.current) {
@@ -50,12 +50,13 @@ const EditForm = (props: Props) => {
 
     const handleFileDeleteButtonClick = () => {
         URL.revokeObjectURL(image);
-        setImage(null);
-        fileInputRef.current.value = '';
+        setImage('');
+        fileInputRef.current!.value = '';
     }
 
     const handleFileChanged = (event: ChangeEvent<HTMLInputElement>) => {
-        const newImage = event.target?.files[0];
+        if (!event.target.files) return;
+        const newImage = event.target.files[0];
         if (newImage) {
             const imageObjectUrl = URL.createObjectURL(newImage);
             setImage(imageObjectUrl);
@@ -75,8 +76,8 @@ const EditForm = (props: Props) => {
             await axios.put(`/api/${props.contact.id}`, JSON.stringify(formData));
             if (image) {
                 URL.revokeObjectURL(image);
-                setImage(null);
-                fileInputRef.current.value = ''
+                setImage('');
+                fileInputRef.current!.value = ''
             }
             props.onDataUpdate();
             setFormData(emptyFormData);

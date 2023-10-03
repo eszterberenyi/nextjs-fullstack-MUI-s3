@@ -1,5 +1,5 @@
 'use client'
-import {IconButton, Grid} from "@mui/material";
+import {IconButton, Grid, Button} from "@mui/material";
 import styles from '../../app/page.module.css'
 import headerStyles from './Header.module.css'
 import Avatar from '@mui/material/Avatar';
@@ -40,15 +40,24 @@ const Header = (props: Props) => {
                     <Avatar src="/icons/photo.jpeg" sx={{height: '20px', width: '20px' }}/>
                 </Grid>
                 <Grid item  > 
-                    <IconButton
+                    <Button
                         className={headerStyles.addBtn}
-                        size='small'
                         onClick={props.handleOpenDialog}
                     >
                         <img src="/icons/Add.png" alt="add icon" className={headerStyles.iconSize}/>
-                        <span className={`text ${headerStyles.addBtnText}`} style={{color: 'white'}}>
-                            Add new
+                        <span style={{color: 'white'}}>
+                            Add&nbsp;
                         </span>
+
+                        <span className={`text ${headerStyles.addBtnText}`} style={{color: 'white'}}>
+                            new
+                        </span>
+                    </Button>
+                    <IconButton
+                        className={headerStyles.addIconBtn}
+                        onClick={props.handleOpenDialog}
+                    >
+                       <img src="/icons/Add.png" alt="add icon" className={headerStyles.iconSize}/>
                     </IconButton>
                 </Grid>
             </Grid>

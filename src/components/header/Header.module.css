@@ -1,7 +1,16 @@
 .addBtn {
     border-radius: 20px;
+    text-transform:capitalize !important;
     border: 1px solid #3C3C3C;  
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%), linear-gradient(180deg, rgba(40, 40, 40, 0.70) 0%, #282828 100%), #141414;
+}
+
+.addBtnText {
+    text-transform:lowercase !important;
+}
+
+.addIconBtn {
+    display: none;
 }
 
 .iconSize {
@@ -13,11 +22,15 @@
     .headerFontSize {
       font-size: 20px;
     }
-    .addBtnText {
+    .addBtn {
         display: none !important
+    }
+    .addIconBtn {
+        display: flex;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 100%), linear-gradient(180deg, rgba(40, 40, 40, 0.70) 0%, #282828 100%), #141414;
     }
     .iconSize {
         height: 14px;
-        width: 14px;;
+        width: 14px;
     }
   }

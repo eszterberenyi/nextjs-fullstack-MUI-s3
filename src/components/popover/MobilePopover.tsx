@@ -1,5 +1,6 @@
 import {IconButton, Grid, Popover} from "@mui/material";
 import styles from '../contacts/Contact.module.css'
+import {MouseEvent} from 'react'
 
 interface Props {
     touchPopoverOpen: boolean;
