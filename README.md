@@ -16,7 +16,7 @@ AWS_SECRET_KEY="your key"
 
 **Don't forget to rename it to .env!**
 
-Change credentials to match your own in the **s3.ts** file.
+Change credentials to match your own in the **s3.ts** file, including region, bucket name and the constant part of the url for the uploaded images.
 
 ### Set up Prisma
 	npx prisma migrate reset
