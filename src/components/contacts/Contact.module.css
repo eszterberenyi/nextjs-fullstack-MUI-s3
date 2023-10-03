@@ -57,8 +57,9 @@
     height: 16px;
 }
 
-.removeIcon:hover {
+.activeIcon:hover {
     background: var(--grey-g-70, #232323);
 }
+
 
 

@@ -3,6 +3,8 @@ import React, { useRef, useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
+import { ContactWithId } from '@/prisma/seed';
+import { awsUrl } from '@/src/s3';
 
 interface FormData {
     name: string;
@@ -16,19 +18,28 @@ interface Props {
     dialogOpen: boolean;
     handleCloseDialog: () => void;
     onDataUpdate: () => void;
+    contact: ContactWithId
   }
 
-const initialFormData: FormData = {
-    name: '',
-    phone: '',
-    email: '',
-    hasPhoto: false,
-    photo: ''
-};
+const EditForm = (props: Props) => {
 
-const ContactForm = (props: Props) => {
+    const initialFormData: FormData = {
+        name: props.contact.name,
+        phone: props.contact.phone,
+        email: props.contact.email,
+        hasPhoto: props.contact.hasPhoto,
+        photo: props.contact.hasPhoto ? `${awsUrl}${props.contact.id}` : ''
+    };
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const emptyFormData: FormData = {
+        name: "",
+        phone: "",
+        email: "",
+        hasPhoto: false,
+        photo: "",
+    }
+
+    const [formData, setFormData] = useState<FormData>(emptyFormData);
     const [image, setImage] = useState(null);
     const fileInputRef = useRef(null);
      
@@ -49,6 +60,7 @@ const ContactForm = (props: Props) => {
         if (newImage) {
             const imageObjectUrl = URL.createObjectURL(newImage);
             setImage(imageObjectUrl);
+            setFormData({...formData, hasPhoto: false})
         }
       };
 
@@ -77,8 +89,8 @@ const ContactForm = (props: Props) => {
         <Dialog
         open={props.dialogOpen}
         onClose={props.handleCloseDialog}
-        aria-labelledby="modal-modal-add-contact-dialog"
-        aria-describedby="modal-modal-add-contact-dialog"
+        aria-labelledby="modal-modal-edit-contact-dialog"
+        aria-describedby="modal-modal--contact-dialog"
         PaperProps={{
             elevation: 0,
             sx: {
@@ -96,7 +108,7 @@ const ContactForm = (props: Props) => {
             className={styles.mainContainer}
         >
                 <Grid item>
-                    <h2>Add Contact</h2>
+                    <h2>Edit Contact</h2>
                 </Grid>
                 
                 <Grid
@@ -104,9 +116,13 @@ const ContactForm = (props: Props) => {
                     container
                     spacing={2}
                     alignItems='center'
-                    justifyContent={image? 'space-between' : 'flex-start'}>
+                    justifyContent={image? 'space-between' : 'flex-start'}
+                >
                     <Grid item >
-                        <Avatar src={image} sx={{width: '60px', height: '60px'}}/>
+                        <Avatar
+                            src={formData.hasPhoto? initialFormData.photo : image}
+                            sx={{width: '60px', height: '60px'}}
+                        />
                     </Grid>
                     <Grid item>
                         <IconButton
@@ -166,6 +182,7 @@ const ContactForm = (props: Props) => {
                                     id="name"
                                     name="name"
                                     value={formData.name}
+                                    placeholder={initialFormData.name}
                                     onChange={handleChange}
                                     required
                                     className={styles.textInput}
@@ -182,6 +199,7 @@ const ContactForm = (props: Props) => {
                                     id="phone"
                                     name="phone"
                                     value={formData.phone}
+                                    placeholder={initialFormData.phone}
                                     onChange={handleChange}
                                     required
                                     className={styles.textInput}
@@ -197,6 +215,7 @@ const ContactForm = (props: Props) => {
                                     id="email"
                                     name="email"
                                     value={formData.email}
+                                    placeholder={initialFormData.email}
                                     onChange={handleChange}
                                     required
                                     className={styles.textInput}
@@ -230,9 +249,9 @@ const ContactForm = (props: Props) => {
                         </Grid>
                     </form>
                 </Grid>
-            </Grid>
+        </Grid>
         </Dialog>
     );
 };
 
-export default ContactForm
+export default EditForm
