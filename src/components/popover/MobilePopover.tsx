@@ -4,7 +4,9 @@ import styles from '../contacts/Contact.module.css'
 interface Props {
     touchPopoverOpen: boolean;
     touchAnchorEl: HTMLButtonElement | null;
-    handleTouchClose: () => void
+    handleTouchClose: () => void;
+    handleOpenDialog: () => void;
+    handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const MobilePopover = (props: Props) => {
@@ -39,7 +41,12 @@ const MobilePopover = (props: Props) => {
                     </IconButton>
                 </Grid>
                 <Grid item>
-                    <IconButton disabled className={styles.icon} size="small">
+                    <IconButton
+                        className={styles.icon}
+                        size="small"
+                        disableRipple
+                        onClick={props.handleOpenDialog}
+                    >
                         <img src="/icons/Settings.png" alt="edit icon" className={styles.iconImg}/>
                         <span  className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Edit
@@ -55,7 +62,12 @@ const MobilePopover = (props: Props) => {
                     </IconButton>
                 </Grid>
                 <Grid item className={styles.removeIcon}> 
-                    <IconButton disableRipple className={`${styles.icon}`} size="small">
+                    <IconButton
+                        disableRipple
+                        className={`${styles.icon}`}
+                        size="small"
+                        onClick={(e) => props.handleDelete(e)}
+                    >
                         <img src="/icons/Delete.png" alt="delete icon" className={styles.iconImg}/>
                         <span className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Remove

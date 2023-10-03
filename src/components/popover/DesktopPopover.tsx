@@ -7,6 +7,7 @@ interface Props {
     mouseAnchorEl: HTMLButtonElement | null;
     handleMouseClose: () => void;
     handleDelete: (e: MouseEvent<HTMLButtonElement>) => void;
+    handleOpenDialog: () => void
 }
 
 
@@ -25,8 +26,13 @@ const DesktopPopver = (props: Props) => {
             }}
         >
             <Grid container direction='column'>
-                <Grid item>
-                    <IconButton disabled className={styles.icon} size="small">
+                <Grid item className={styles.activeIcon}>
+                    <IconButton
+                        className={styles.icon}
+                        size="small"
+                        disableRipple
+                        onClick={props.handleOpenDialog}
+                    >
                         <img src="/icons/Settings.png" alt="edit icon" className={styles.iconImg}/>
                         <span  className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Edit
@@ -38,10 +44,10 @@ const DesktopPopver = (props: Props) => {
                         <img src="/icons/Favourite.png" alt="favourite icon" className={styles.iconImg}/>
                         <span  className="text" style={{color: 'white', marginLeft: '5px'}}>
                             Favourite
-                        </span>
+                        </span> 
                     </IconButton>
                 </Grid>
-                <Grid item className={styles.removeIcon}> 
+                <Grid item className={styles.activeIcon}> 
                     <IconButton
                         disableRipple
                         className={`${styles.icon}`}

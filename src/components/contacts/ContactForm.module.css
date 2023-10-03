@@ -7,7 +7,17 @@
     border-radius: 8px;
     border: 1px solid var(--grey-g-60, #282828);
     background: var(--grey-g-80, #1E1E1E);
-    color: rgba(255, 255, 255, 0.32);}
+    color: white
+}
+
+.textInput:focus::placeholder {
+    color: transparent;
+}
+
+.textInput:focus {
+    background: var(--grey-g-60, #282828);
+
+}
 
 .labelColor {
     color: rgba(255, 255, 255, 0.56);
