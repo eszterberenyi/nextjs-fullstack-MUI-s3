@@ -60,7 +60,7 @@ const ContactForm = (props: Props) => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/api/contacts", JSON.stringify(formData));
+            await axios.post("/api/contacts", JSON.stringify(formData));
             props.onDataUpdate();
             setFormData(initialFormData);
             if (image) {

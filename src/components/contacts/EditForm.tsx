@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState, ChangeEvent, FormEvent } from 'react';
+import React, { useRef, useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import axios from 'axios';
 import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
@@ -11,7 +11,7 @@ interface FormData {
     phone: string;
     email: string;
     hasPhoto: boolean;
-    photo: string
+    photo?: string
 }
 
 interface Props {
@@ -36,7 +36,6 @@ const EditForm = (props: Props) => {
         phone: "",
         email: "",
         hasPhoto: false,
-        photo: "",
     }
 
     const [formData, setFormData] = useState<FormData>(emptyFormData);
@@ -72,14 +71,14 @@ const EditForm = (props: Props) => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const response = await axios.post("/api/contacts", JSON.stringify(formData));
-            props.onDataUpdate();
-            setFormData(initialFormData);
+            await axios.put(`/api/${props.contact.id}`, JSON.stringify(formData));
             if (image) {
                 URL.revokeObjectURL(image);
                 setImage(null);
                 fileInputRef.current.value = ''
             }
+            props.onDataUpdate();
+            setFormData(emptyFormData);
         } catch (error) {
             console.error('Error:', error);
         }
@@ -184,7 +183,6 @@ const EditForm = (props: Props) => {
                                     value={formData.name}
                                     placeholder={initialFormData.name}
                                     onChange={handleChange}
-                                    required
                                     className={styles.textInput}
                                     autoComplete="off"
                                 />
@@ -201,7 +199,6 @@ const EditForm = (props: Props) => {
                                     value={formData.phone}
                                     placeholder={initialFormData.phone}
                                     onChange={handleChange}
-                                    required
                                     className={styles.textInput}
                                     autoComplete="off"
                                 />
@@ -217,7 +214,6 @@ const EditForm = (props: Props) => {
                                     value={formData.email}
                                     placeholder={initialFormData.email}
                                     onChange={handleChange}
-                                    required
                                     className={styles.textInput}
                                     autoComplete="off"
                                 />

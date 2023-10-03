@@ -44,7 +44,7 @@ const Contact = (props: Props) => {
         e.preventDefault();
         try {
           const { id } = props.contactData;
-          await axios.delete(`/api/${id}`);
+          const res = await axios.delete(`/api/${id}`);
           props.onDataUpdate();
         } catch (error) {
           console.error('Error:', error);
