@@ -4,7 +4,9 @@
 
 ### Install dependencies
 	npm install
-	*or*
+
+	or
+	
 	yarn install
 	
 ### Set up s3 connection
