@@ -11,6 +11,7 @@
 Modify the provided .example.env file and set up necessary environment variables:
 	
 AWS_ACCESS_KEY="your_key"
+
 AWS_SECRET_KEY="your key"
 
 **Don't forget to rename it to .env!**
