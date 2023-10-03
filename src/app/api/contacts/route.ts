@@ -1,6 +1,4 @@
 import prisma from "@/src/db";
-import fs from "fs";
-import { generateUploadURL } from "@/src/s3";
 import { NextResponse } from "next/server";
 
 export const GET = async (req: Request, res: Response) => {
@@ -25,10 +23,6 @@ export const POST = async (req: Request) => {
                 hasPhoto: formData.hasPhoto,
             }
         });
-        // if (createdContact.hasPhoto) {            
-        // }
-        // const url = await generateUploadURL(createdContact.id);
-        // console.log('url', url)
         return NextResponse.json(createdContact)
     } catch (error) {
         console.error('Error creating contact:', error);

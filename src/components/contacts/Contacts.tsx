@@ -20,17 +20,16 @@ const Contacts = (props: Props) => {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get('/api/contacts');
-          const newData = response.data;
-          setData(newData);
+            const response = await axios.get('/api/contacts');
+            const newData = response.data;
+            setData(newData);
         } catch (error) {
-          console.error(error);
-        }
-      };
-    
-      useEffect(() => {
+            console.error(error);
+        }};
+
+        useEffect(() => {
         fetchData();
-      }, []);
+        }, []);
     
 
     return (
@@ -112,7 +111,11 @@ const Contacts = (props: Props) => {
                     pl={2}
                 >
                     {data.map((contact => 
-                        <Contact contactData={contact} key={contact.id}/>    
+                        <Contact
+                            contactData={contact}
+                            key={contact.id}
+                            onDataUpdate={fetchData}
+                        />    
                     ))}
                 </Grid>
                 <Grid item xs={2} md={3}>

@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import {Grid, Avatar, Dialog, IconButton} from "@mui/material";
 import styles from './ContactForm.module.css'
@@ -44,7 +44,7 @@ const ContactForm = (props: Props) => {
         fileInputRef.current.value = '';
     }
 
-    const handleFileChanged = (event) => {
+    const handleFileChanged = (event: ChangeEvent<HTMLInputElement>) => {
         const newImage = event.target?.files[0];
         if (newImage) {
             const imageObjectUrl = URL.createObjectURL(newImage);
@@ -52,12 +52,12 @@ const ContactForm = (props: Props) => {
         }
       };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             const response = await axios.post("/api/contacts", JSON.stringify(formData));
