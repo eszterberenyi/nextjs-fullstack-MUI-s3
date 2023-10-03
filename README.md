@@ -1,10 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Getting Started
 
-## Getting Started
+### Clone the github repository to your local machine
 
-npx prisma migrate reset
+### Install dependencies
+	npm intall
+	*or*
+	yarn install
+	
+### Set up s3 connection
+Modify the provided .example.env file and set up necessary environment variables:
+	
+AWS_ACCESS_KEY="your_key"
+AWS_SECRET_KEY="your key"
 
-First, run the development server:
+**Don't forget to rename it to .env!**
+
+**Note:** If you need access to my bucket, let me know a safe way to give you these credentials.
+
+Otherwise change credentials to match your own in the **s3.ts** file.
+
+### Set up Prisma
+	npx prisma migrate reset
+
+### Run the development server
 
 ```bash
 npm run dev
@@ -16,23 +34,10 @@ pnpm dev
 bun dev
 ```
 
+### Finally
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### TODO
+1. Image upload to s3 bucket outside of the initial seed file doesn't work, so in the *Add contact* and *Edit contact* dialogs you can only upload pictures temporarily to the DOM. 
+3. Writing tests (e.g. with Cypress or something similar).
+4. Deployment.
