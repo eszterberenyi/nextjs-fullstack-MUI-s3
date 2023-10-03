@@ -16,9 +16,7 @@ AWS_SECRET_KEY="your key"
 
 **Don't forget to rename it to .env!**
 
-**Note:** If you need access to my bucket, let me know a safe way to give you these credentials.
-
-Otherwise change credentials to match your own in the **s3.ts** file.
+Change credentials to match your own in the **s3.ts** file.
 
 ### Set up Prisma
 	npx prisma migrate reset
