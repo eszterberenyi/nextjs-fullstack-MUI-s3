@@ -1,13 +1,13 @@
 
 @media (max-width: 815px) {
     .contactName {
-      font-size: 14px; /* Decrease font size for smaller screens */
+      font-size: 14px; 
     }
 }
 
 @media (max-width: 500px) {
     .contactName {
-      font-size: 11px; /* Decrease font size for smaller screens */
+      font-size: 11px; 
     }
     .phoneNumber {
         font-size: 10px;
@@ -43,7 +43,6 @@
 
 .icon {
     color: white;
-    /* padding: 0 */
 }
 
 .moreIcon:hover {

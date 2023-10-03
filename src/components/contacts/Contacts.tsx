@@ -29,7 +29,6 @@ const Contacts = (props: Props) => {
       };
     
       useEffect(() => {
-        // Fetch data when the component mounts
         fetchData();
       }, []);
     
@@ -120,7 +119,11 @@ const Contacts = (props: Props) => {
 
                 </Grid>
             </Grid>
-            <ContactForm onDataUpdate={fetchData} dialogOpen={dialogOpen} handleCloseDialog={handleCloseDialog}/>
+            <ContactForm
+                onDataUpdate={fetchData}
+                dialogOpen={dialogOpen}
+                handleCloseDialog={handleCloseDialog}
+            />
         </>
     )
 }

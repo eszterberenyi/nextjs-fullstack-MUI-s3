@@ -11,7 +11,7 @@
 
 @media (max-width: 815px) {
     .headerFontSize {
-      font-size: 20px; /* Decrease font size for smaller screens */
+      font-size: 20px;
     }
     .addBtnText {
         display: none !important
