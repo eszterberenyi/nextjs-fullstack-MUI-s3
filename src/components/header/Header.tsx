@@ -45,7 +45,7 @@ const Header = (props: Props) => {
                         onClick={props.handleOpenDialog}
                     >
                         <img src="/icons/Add.png" alt="add icon" className={headerStyles.iconSize}/>
-                        <span style={{color: 'white'}}>
+                        <span className='text' style={{color: 'white'}}>
                             Add&nbsp;
                         </span>
 

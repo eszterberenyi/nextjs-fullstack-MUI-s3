@@ -1,3 +1,15 @@
+# Tech stack
+
+typescript // Next.js // MUI // Prisma // SQLite // s3
+
+# Add, remove, edit contacts
+
+![''](./public/screenshots/2023-10-19_19-08_1.png)
+
+![''](./public/screenshots/2023-10-19_19-09.png)
+
+![''](./public/screenshots/2023-10-19_19-09_1.png)
+
 # Getting Started
 
 ### Clone the github repository to your local machine
